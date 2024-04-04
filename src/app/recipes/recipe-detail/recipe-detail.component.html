@@ -19,13 +19,13 @@
         Manage Recipe <span class="caret"></span>
       </button>
       <ul class="nav-link dropdown-toggle"
-              href="#"
+              routerLink="#"
               role="button"
               data-bs-toggle="dropdown"
               aria-expanded="false" *ngIf="isOpen">
-        <li><a href="#">To Shopping List</a></li>
-        <li><a href="#">Edit Recipe</a></li>
-        <li><a href="#">Delete Recipe</a></li>
+        <li><a routerLink="#">To Shopping List</a></li>
+        <li><a routerLink="#">Edit Recipe</a></li>
+        <li><a routerLink="#">Delete Recipe</a></li>
       </ul>
     </div> -->
     <div class="dropdown" appDropdown>
@@ -46,8 +46,8 @@
             >To Shopping List</a
           >
         </li>
-        <li><a class="dropdown-item" href="#">Edit Recipe</a></li>
-        <li><a class="dropdown-item" href="#">Delete Recipe</a></li>
+        <li><a class="dropdown-item" routerLink="#">Edit Recipe</a></li>
+        <li><a class="dropdown-item" routerLink="#">Delete Recipe</a></li>
       </ul>
     </div>
   </div>

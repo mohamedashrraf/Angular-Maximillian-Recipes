@@ -9,13 +9,13 @@ import { RecipeService } from './recipe.service';
 })
 export class RecipesComponent {
 
-  selectedRecipe!: Recipe;
+  // selectedRecipe!: Recipe;
 
   constructor(private recipeService: RecipeService) { }
 
-  ngOnInit() {this.recipeService.recipeSelected.subscribe((recipe:Recipe)=>{
-    this.selectedRecipe = recipe;
-  })
-}
+//   ngOnInit() {this.recipeService.recipeSelected.subscribe((recipe:Recipe)=>{
+//     this.selectedRecipe = recipe;
+//   })
+// }
 
 }

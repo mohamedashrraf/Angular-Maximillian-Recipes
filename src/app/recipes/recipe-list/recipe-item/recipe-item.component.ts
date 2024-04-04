@@ -1,5 +1,6 @@
+import { Router } from '@angular/router';
 import { RecipeService } from './../../recipe.service';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input  } from '@angular/core';
 import { Recipe } from '../../recipe.model';
 
 @Component({
@@ -11,11 +12,14 @@ export class RecipeItemComponent {
 
   @Input() recipe?: Recipe;
   // @Output() recipeSelected = new EventEmitter<void>();
+  // id!: string;
 
-  constructor (private recipeService:RecipeService){}
+  constructor (private recipeService:RecipeService, private router: Router){}
 
-  onSelected() {
+  onSelected(id: string) {
     // this.recipeSelected.emit();
-    this.recipeService.recipeSelected.emit(this.recipe);
+    // this.recipeService.recipeSelected.emit(this.recipe);
+
+    // this.router.navigate(['recipe', id]);
   }
 }
