@@ -13,13 +13,15 @@ export class RecipeItemComponent {
   @Input() recipe?: Recipe;
   // @Output() recipeSelected = new EventEmitter<void>();
   // id!: string;
+  @Input() index!: number;
 
   constructor (private recipeService:RecipeService, private router: Router){}
 
-  onSelected(id: string) {
-    // this.recipeSelected.emit();
-    // this.recipeService.recipeSelected.emit(this.recipe);
+  // onSelected(id: string) {
+  //   // this.recipeSelected.emit();
+  //   // this.recipeService.recipeSelected.emit(this.recipe);
 
-    // this.router.navigate(['recipe', id]);
-  }
+  //   // this.router.navigate(['recipe', id]);
+  // }
+
 }
