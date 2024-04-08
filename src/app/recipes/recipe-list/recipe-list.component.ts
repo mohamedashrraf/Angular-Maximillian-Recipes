@@ -21,6 +21,9 @@ export class RecipeListComponent {
   ngOnInit() {
     this.recipes=this.recipeService.getRecipes();
 
+    this.recipeService.recipesChanged.subscribe((recipes:Recipe[])=>{ //لما اضيف ريسبي يسمع ويضيفه في قائمة ال recipes
+      this.recipes=recipes;
+    })
   }
   // onRecipeSelected(recipe:Recipe) {
   //   this.recipeWasSelected.emit(recipe);

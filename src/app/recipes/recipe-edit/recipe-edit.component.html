@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-xs-12">
           <button type="submit" class="btn btn-success" [disabled]="!recipeForm.valid">Save</button>
-          <button type="button" class="btn btn-danger">Cancel</button>
+          <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
         </div>
       </div>
       <div class="row">
@@ -25,7 +25,7 @@
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <img [src]="imagePath.value" class="img-responsive" style="max-height: 300px">
+          <img [src]="imagePath.value" class="img-responsive" style="max-height: 300px"> <!--نساوي ال src بالريفرنس عشان تظهر الصورة في صفحة ال edit-->
         </div>
       </div>
       <div class="row">
@@ -40,6 +40,8 @@
       <div class="row">
         <div class="col-xs-12" formArrayName="ingredients">
           <div class="row"
+          *ngFor="let ingredientCtrl of recipeControls; let i = index"
+            [formGroupName]="i"
             style="margin-top: 10px;">
             <div class="col-xs-8">
               <input type="text" class="form-control" formControlName="name">
@@ -48,13 +50,13 @@
               <input type="number" class="form-control" formControlName="amount">
             </div>
             <div class="col-xs-2">
-              <button type="button" class="btn btn-danger" >X</button>
+              <button type="button" class="btn btn-danger" (click)="onDeleteIngredient(i)">X</button>
             </div>
           </div>
           <hr>
           <div class="row">
             <div class="col-xs-12">
-              <button type="button" class="btn btn-success">Add Ingredient</button>
+              <button type="button" class="btn btn-success" (click)="onAddIngredient()">Add Ingredient</button>
             </div>
           </div>
         </div>
