@@ -14,14 +14,17 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/recipes" routerLinkActive="active"
+        <li class="nav-item"  routerLinkActive="active">
+          <a class="nav-link" routerLink="/recipes"
             >Recipes</a
           >
           <!-- routerLink="#" (click)="onSelect('recipe')" -->
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/shopping-list" routerLinkActive="active"
+          <li class="nav-item" routerLinkActive="active" *ngIf="!isAuthenticated">
+            <a class="nav-link" routerLink="/auth" >Authenticate</a>
+          </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/shopping-list"
             >Shopping List</a
           >
           <!-- routerLink="#" (click)="onSelect('shopping-list')" -->
@@ -32,15 +35,14 @@
           <li class="dropdown">
             <a
               class="nav-link dropdown-toggle"
-              routerLink="#"
               role="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
               >Manage <span class="caret"></span
             ></a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" routerLink="#">Save Data</a></li>
-              <li><a class="dropdown-item" routerLink="#">Fetch Data</a></li>
+              <li><a class="dropdown-item" (click)="onSaveData()">Save Data</a></li>
+              <li><a class="dropdown-item" (click)="onFetchData()">Fetch Data</a></li>
             </ul>
           </li>
         </ul>
