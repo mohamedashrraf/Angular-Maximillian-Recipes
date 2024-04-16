@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-light mb-3">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="#">Recipe Book</a>
+    <a class="navbar-brand" routerLink="/recipes">Recipe Book</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -14,7 +14,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item"  routerLinkActive="active">
+        <li class="nav-item"  routerLinkActive="active" *ngIf="isAuthenticated">
           <a class="nav-link" routerLink="/recipes"
             >Recipes</a
           >
@@ -32,7 +32,10 @@
       </ul>
       <form class="d-flex" role="search">
         <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">
+          <li class="nav-item" *ngIf="isAuthenticated">
+            <a class="nav-link" style="cursor: pointer;" (click)="onLogout()">Logout</a>
+          </li>
+          <li class="dropdown" *ngIf="isAuthenticated">
             <a
               class="nav-link dropdown-toggle"
               role="button"
@@ -41,8 +44,8 @@
               >Manage <span class="caret"></span
             ></a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" (click)="onSaveData()">Save Data</a></li>
-              <li><a class="dropdown-item" (click)="onFetchData()">Fetch Data</a></li>
+              <li><a class="dropdown-item" style="cursor: pointer;"  (click)="onSaveData()">Save Data</a></li>
+              <li><a class="dropdown-item" style="cursor: pointer;" (click)="onFetchData()">Fetch Data</a></li>
             </ul>
           </li>
         </ul>
