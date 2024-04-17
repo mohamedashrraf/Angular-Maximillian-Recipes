@@ -12,7 +12,7 @@ export class AuthComponent {
 
   isLoginMode = true;
   isLoading = false;
-  error!: string ;
+  error!: string | null ;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -81,6 +81,8 @@ export class AuthComponent {
     form.reset();
   }
 
-
+  onClose() { //ما ادوس علي close او في اي حتة في الشاشة يقفل ال alert
+    this.error = null;
+  }
 
 }

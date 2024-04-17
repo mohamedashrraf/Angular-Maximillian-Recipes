@@ -22,8 +22,10 @@ export interface AuthResponseData {
 export class AuthService {
 
   user = new BehaviorSubject<User | null>(null);
+    private tokenExpirationTimer: any;
 
-  constructor(private http:HttpClient) { }
+
+  constructor(private http:HttpClient, private router:Router) { }
 
   signUp(email: string, password: string){ //ساين اب في الفاير بيز ليه لينك وتحط فيه ال [API_KEY] في الاخر
     return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCFXx2XqtaS4Va6Uw0HRrGeFbYB_Q6K67k',{
@@ -60,6 +62,49 @@ export class AuthService {
         }))
   }
 
+  autoLogin(){ //عشان افضل عامل لوج ان بعد ما اعمل ريفريش
+    const userData: {
+      email: string;
+      id: string;
+      _token: string;
+      _tokenExpirationDate: string;
+    } = JSON.parse(localStorage.getItem('userData')!);
+    if (!userData) {
+      return;
+    }
+
+    const loadedUser = new User(
+      userData.email,
+      userData.id,
+      userData._token,
+      new Date(userData._tokenExpirationDate)
+    );
+
+    if (loadedUser.token) { //لو فيه توكين موجود يعمله emit
+      this.user.next(loadedUser);
+      // const expirationDuration =
+      //   new Date(userData._tokenExpirationDate).getTime() -
+      //   new Date().getTime();
+      // this.autoLogout(expirationDuration);
+    }
+  }
+
+  logout(){
+    this.user.next(null);
+    localStorage.removeItem('userData');
+    this.router.navigate(['/auth']);
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    this.tokenExpirationTimer = null;
+  }
+
+    autoLogout(expirationDuration: number) { //يعمل لوج اوت لوحده بعد فترة معينة
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout();
+    }, expirationDuration);
+  }
+
     handleError(errorRes: HttpErrorResponse) {
     let errorMessage = 'An unknown error occurred!';
     if (!errorRes.error || !errorRes.error.error) {
@@ -88,6 +133,7 @@ export class AuthService {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(email, userId, token, expirationDate);
     this.user.next(user);
+    localStorage.setItem('userData', JSON.stringify(user));
   }
 
 

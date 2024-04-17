@@ -24,19 +24,29 @@ export class HeaderComponent {
       console.log(!!user);
     });
   }
-  onSelect(feature:string) {
-    this.featureSelected.emit(feature);
-  }
+  // onSelect(feature:string) {
+  //   this.featureSelected.emit(feature);
+  // }
 
   onSaveData(){
     this.dataStorageService.storeRecipes();
   }
 
   onFetchData(){
-    this.dataStorageService.fetchRecipes();
+    this.dataStorageService.fetchRecipes().subscribe(
+      res=> {
+          console.log(res);
+        },error=> {console.log(error)}
+      );
+
   }
 
   onLogout(){
-
+    this.authService.logout();
   }
+
+    ngOnDestroy() {
+    this.userSub.unsubscribe();
+  }
+
 }

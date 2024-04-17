@@ -11,7 +11,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class RecipeDetailComponent {
 
-  recipe!: Recipe;
+  recipe: Recipe | null = null;
   id!: number;
 
   constructor(private recipeService: RecipeService, private route: ActivatedRoute,  private router: Router) { }
@@ -30,7 +30,7 @@ export class RecipeDetailComponent {
 
   }
   onAddToShoppingList() {
-    this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
+    this.recipeService.addIngredientsToShoppingList(this.recipe!.ingredients);
 
     // this.slService.addIngredients(this.recipe.ingredients);
   }
