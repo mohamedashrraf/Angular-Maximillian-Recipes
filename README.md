@@ -1,3 +1,7 @@
+# Firebase Deployment
+
+https://angular-max-recipes1.web.app/
+
 # App
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.0.
